@@ -1,17 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+function MyInfo () {
+    const headerStyle = {
+        color: 'blue',
+    }
+    return (
+        <div>
+            <h1 style={headerStyle}>Abhishek Luthra</h1>
+            <p>This is a paragraph about me. Below is a list of places I like to vacation:</p>
+            <ul>
+                <li>Barcelona</li>
+                <li>Los Cabos</li>
+                <li>Miami</li>
+            </ul>
+        </div>
+    );
+};
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <MyInfo />,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
