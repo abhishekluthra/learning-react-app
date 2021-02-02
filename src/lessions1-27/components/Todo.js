@@ -5,12 +5,8 @@ class Todo extends React.Component {
         super();
     }
 
-    handleChange() {
-        console.log("In Todo Handle Change")
-    }
-
     render() {
-        console.log("In Todo:\n" + this.props.todoItem);
+        // console.log("In Todo:\n" + this.props.todoItem);
         return (
             <div>
                 <input 
@@ -18,7 +14,7 @@ class Todo extends React.Component {
                     name="checklistItem1" 
                     value={this.props.todoItem.todo} 
                     checked={this.props.todoItem.checked}
-                    onChange={this.handleChange}
+                    onChange={() => this.props.handleChange(this.props.todoItem.id)}
                 />
                 <label htmlFor="checklistItem1">{this.props.todoItem.todo}</label><br/>
             </div>

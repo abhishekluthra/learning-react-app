@@ -117,7 +117,18 @@ class App extends React.Component {
     }
 
     handleChange(id) {
-        console.log(id);
+        this.setState( prevState => {
+            const newTodoItemState = prevState.todoItems.map(item => {
+                if(item.id === id) {
+                    item.checked = !item.checked
+                }
+                return item;
+            });
+            console.log(newTodoItemState);
+            return {
+                todoItems: newTodoItemState,
+            }; 
+        });
     }
 
     render() {
@@ -127,12 +138,13 @@ class App extends React.Component {
                         todoItem={item} 
                         handleChange={this.handleChange}
                     />
-        })
+        });
+        
         return (
             <div>
                 {todoComponents}
             </div>
-        )
+        );
 
     }
 }
