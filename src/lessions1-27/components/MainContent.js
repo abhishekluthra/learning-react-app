@@ -2,6 +2,10 @@ import React from 'react';
 
 import ItemList from '../data/Items';
 import Item from './Item';
+
+import TodoItems from '../data/TodoData';
+import Todo from './Todo';
+
 function MainContent () {
 
     let itemComponents = ItemList.map( (item) => {
@@ -12,10 +16,16 @@ function MainContent () {
         />
     });
 
+    let todoComponents = TodoItems.map( (todoItem) => {
+        return <Todo key={todoItem.id} todoItem={todoItem}/>
+    });
+
     return (
         <main>
             <h1>This is the main content section:</h1>
             {itemComponents}
+            <hr />
+            {todoComponents}
         </main>
     )
 }
