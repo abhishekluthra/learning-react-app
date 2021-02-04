@@ -6,9 +6,15 @@ class Todo extends React.Component {
     }
 
     render() {
-        // console.log("In Todo:\n" + this.props.todoItem);
+        let classNameText=''
+        if(this.props.todoItem.checked) {
+            classNameText = 'todo-item completed-item';
+        } else {
+            classNameText = 'todo-item incompleted-item';
+        }
+
         return (
-            <div>
+            <div className={classNameText}>
                 <input 
                     type="checkbox" 
                     name="checklistItem1" 
@@ -16,7 +22,7 @@ class Todo extends React.Component {
                     checked={this.props.todoItem.checked}
                     onChange={() => this.props.handleChange(this.props.todoItem.id)}
                 />
-                <label htmlFor="checklistItem1">{this.props.todoItem.todo}</label><br/>
+                <p>{this.props.todoItem.todo}</p>
             </div>
     
         )
