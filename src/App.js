@@ -280,32 +280,82 @@ import React from 'react';
 
 class App extends React.Component {
     constructor() {
-        super();
+        super()
         this.state = {
             firstName: "",
-            lastName: ""
+            lastName: "",
+            age: 0,
+            gender: "",
+            destination: "",
+            dietaryRestriction: [ ]
         }
-
         this.handleChange = this.handleChange.bind(this);
+        this.checkDietaryRestrictionChecked = this.checkDietaryRestrictionChecked.bind(this);
     }
 
     handleChange(event) {
-        const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        })
+        const {name, value, type, checked} = event.target;
+        type !== "checkbox" ? this.setState({ [name]: value,}):
+                                this.setState((prevState) => {
+                                    return {
+                                        dietaryRestriction: prevState.dietaryRestriction.push(value)
+                                    }
+                                }) 
     }
 
+    checkDietaryRestrictionChecked(value) {
+        const isPresent = this.state.dietaryRestriction.findIndex(restriction => value === restriction );
+        return isPresent > -1;
+    }
+    
     render() {
         return (
-            <div>
-                <input type="text" name="firstName" placeholder="First Name" onChange={this.handleChange} />
-                <input type="text" name="lastName" placeholder="Last Name" onChange={this.handleChange} />
-                <p>{this.state.firstName}</p>
-                <p>{this.state.lastName}</p>
-            </div>
+            <main>
+                <form>
+                    <input type="text"      name="firstName"    placeholder="First Name"    onChange={this.handleChange} /><br />
+                    <input type="text"      name="lastName"     placeholder="Last Name"     onChange={this.handleChange}  /><br />
+                    <input type="number"    name="age"          placeholder="Age"           onChange={this.handleChange}  /><br />
+                    
+                    <label>
+                        <input type="radio" name="gender"   value="Female"  checked={this.state.gender === "Female"}    onChange={this.handleChange} />
+                        Female
+                    </label>
+                    <label>
+                        <input type="radio" name="gender"   value="Male"    checked={this.state.gender === "Male"}      onChange={this.handleChange} />
+                        Male
+                    </label>
+                    <br />
+                    
+                    {/* Create select box for location here */}
+                    <br />
+                    <label>Dietart Restrictions: </label>
+                    <br />
+                    <input type="checkbox" name="dietaryRestriction" value="Almonds" id="almonds" checked={this.checkDietaryRestrictionChecked("Almonds")} onChange={this.handleChange}/>
+                    <label htmlFor="almonds">Almonds</label>
+                    <input type="checkbox" name="dietaryRestriction" value="Chocolate" id="chocolate" checked={this.checkDietaryRestrictionChecked("Chocolate")} onChange={this.handleChange}/>
+                    <label htmlFor="chocolate">Chocolate</label>
+                    <input type="checkbox" name="dietaryRestriction" value="Peanuts" id="peanuts" checked={this.checkDietaryRestrictionChecked("Peanuts")} onChange={this.handleChange}/>
+                    <label htmlFor="peanuts">Peanuts</label>
+                    <input type="checkbox" name="dietaryRestriction" value="Other" id="other" checked={this.checkDietaryRestrictionChecked("Other")} onChange={this.handleChange}/>
+                    <label htmlFor="other">Other</label>
+                    <br />
+                    
+                    <button>Submit</button>
+                </form>
+                <hr />
+                <h2>Entered information:</h2>
+                <p>Your name: {this.state.firstName + " " + this.state.lastName}</p>
+                <p>Your age: {this.state.age}</p>
+                <p>Your gender: {this.state.gender}</p>
+                <p>Your destination: {/* Destination here */}</p>
+                <p>
+                    Your dietary restrictions: 
+                    {/* Dietary restrictions here, comma separated */}
+                </p>
+            </main>
         )
     }
 }
+
 
 export default App
