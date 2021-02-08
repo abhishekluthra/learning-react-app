@@ -284,7 +284,7 @@ class App extends React.Component {
         this.state = {
             firstName: "",
             lastName: "",
-            age: 0,
+            age: "",
             gender: "",
             destination: "",
             dietaryRestriction: [ ]
@@ -312,21 +312,25 @@ class App extends React.Component {
         return (
             <main>
                 <form>
-                    <input type="text"      name="firstName"    placeholder="First Name"    onChange={this.handleChange} /><br />
-                    <input type="text"      name="lastName"     placeholder="Last Name"     onChange={this.handleChange}  /><br />
-                    <input type="number"    name="age"          placeholder="Age"           onChange={this.handleChange}  /><br />
+                    <input type="text" name="firstName" placeholder="First Name" onChange={this.handleChange} /><br />
+                    <input type="text" name="lastName" placeholder="Last Name" onChange={this.handleChange}  /><br />
+                    <input type="number" name="age" placeholder="Age" onChange={this.handleChange}  /><br />
                     
                     <label>
-                        <input type="radio" name="gender"   value="Female"  checked={this.state.gender === "Female"}    onChange={this.handleChange} />
+                        <input type="radio" name="gender" value="Female" checked={this.state.gender === "Female"} onChange={this.handleChange} />
                         Female
                     </label>
                     <label>
-                        <input type="radio" name="gender"   value="Male"    checked={this.state.gender === "Male"}      onChange={this.handleChange} />
+                        <input type="radio" name="gender" value="Male" checked={this.state.gender === "Male"} onChange={this.handleChange} />
                         Male
                     </label>
                     <br />
-                    
-                    {/* Create select box for location here */}
+
+                    <select name="destination" value={this.state.destination} onChange={this.handleChange} placeholder="Select Destination">
+                        <option value="Barcelona" >Barcelona</option>
+                        <option value="London" >London</option>
+                        <option value="Amsterdamn" >Amsterdam</option>
+                    </select>
                     <br />
                     <label>Dietart Restrictions: </label>
                     <br />
@@ -347,7 +351,7 @@ class App extends React.Component {
                 <p>Your name: {this.state.firstName + " " + this.state.lastName}</p>
                 <p>Your age: {this.state.age}</p>
                 <p>Your gender: {this.state.gender}</p>
-                <p>Your destination: {/* Destination here */}</p>
+                <p>Your destination: {this.state.destination}</p>
                 <p>
                     Your dietary restrictions: 
                     {/* Dietary restrictions here, comma separated */}
