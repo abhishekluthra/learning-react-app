@@ -287,25 +287,18 @@ class App extends React.Component {
             age: "",
             gender: "",
             destination: "",
-            dietaryRestriction: [ ]
+            almonds: false,
+            chocolate: false,
+            peanuts: false,
+            other: false
         }
         this.handleChange = this.handleChange.bind(this);
-        this.checkDietaryRestrictionChecked = this.checkDietaryRestrictionChecked.bind(this);
     }
 
     handleChange(event) {
         const {name, value, type, checked} = event.target;
         type !== "checkbox" ? this.setState({ [name]: value,}):
-                                this.setState((prevState) => {
-                                    return {
-                                        dietaryRestriction: prevState.dietaryRestriction.push(value)
-                                    }
-                                }) 
-    }
-
-    checkDietaryRestrictionChecked(value) {
-        const isPresent = this.state.dietaryRestriction.findIndex(restriction => value === restriction );
-        return isPresent > -1;
+                                this.setState({ [name]: checked}); 
     }
     
     render() {
@@ -327,6 +320,7 @@ class App extends React.Component {
                     <br />
 
                     <select name="destination" value={this.state.destination} onChange={this.handleChange} placeholder="Select Destination">
+                        <option value="" >Select Destination</option>
                         <option value="Barcelona" >Barcelona</option>
                         <option value="London" >London</option>
                         <option value="Amsterdamn" >Amsterdam</option>
@@ -334,13 +328,13 @@ class App extends React.Component {
                     <br />
                     <label>Dietart Restrictions: </label>
                     <br />
-                    <input type="checkbox" name="dietaryRestriction" value="Almonds" id="almonds" checked={this.checkDietaryRestrictionChecked("Almonds")} onChange={this.handleChange}/>
+                    <input type="checkbox" name="almonds" value="almonds" checked={this.state.almonds} onChange={this.handleChange}/>
                     <label htmlFor="almonds">Almonds</label>
-                    <input type="checkbox" name="dietaryRestriction" value="Chocolate" id="chocolate" checked={this.checkDietaryRestrictionChecked("Chocolate")} onChange={this.handleChange}/>
+                    <input type="checkbox" name="chocolate" value="chocolate"  checked={this.state.chocolate} onChange={this.handleChange}/>
                     <label htmlFor="chocolate">Chocolate</label>
-                    <input type="checkbox" name="dietaryRestriction" value="Peanuts" id="peanuts" checked={this.checkDietaryRestrictionChecked("Peanuts")} onChange={this.handleChange}/>
+                    <input type="checkbox" name="peanuts" value="peanuts" checked={this.state.peanuts} onChange={this.handleChange}/>
                     <label htmlFor="peanuts">Peanuts</label>
-                    <input type="checkbox" name="dietaryRestriction" value="Other" id="other" checked={this.checkDietaryRestrictionChecked("Other")} onChange={this.handleChange}/>
+                    <input type="checkbox" name="other" value="other" checked={this.state.other} onChange={this.handleChange}/>
                     <label htmlFor="other">Other</label>
                     <br />
                     
@@ -354,7 +348,12 @@ class App extends React.Component {
                 <p>Your destination: {this.state.destination}</p>
                 <p>
                     Your dietary restrictions: 
-                    {/* Dietary restrictions here, comma separated */}
+                </p>
+                <p>
+                    { this.state.almonds ? "Almonds, " : ""}
+                    { this.state.chocolate ? "Chocolate, " : ""}
+                    { this.state.peanuts ? "Peanuts, " : ""}
+                    { this.state.other ? "Other" : ""}
                 </p>
             </main>
         )
